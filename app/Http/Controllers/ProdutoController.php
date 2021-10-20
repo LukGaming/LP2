@@ -36,6 +36,11 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|min:5|max:255',
+            'descricao' => 'required|min:5',
+            'valor' => 'required',
+        ]);
        Produto::create($request->all());
        return redirect('produto/create')->with('mensagem', 'Produto Criado com sucesso!');
     }

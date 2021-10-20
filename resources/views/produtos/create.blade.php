@@ -19,23 +19,33 @@
         {{ session('mensagem') }}
     </div>
 @endif
+
     <form action="{{route('produto.store')}}" method="POST">
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         @csrf
         <br>
         <div class="form-group">
           <label for="nome">Nome do produto</label>
-          <input type="text" class="form-control" placeholder="Digite o nome do produto" id="nome" name="nome">
+          <input type="text" class="form-control" placeholder="Digite o nome do produto" id="nome" name="nome"  value="{{ old('nome') }}">
         </div>
         <br>
         <div class="form-group">
             <label for="exampleInputEmail1">Descricao</label>
-            <textarea type="textarea" class="form-control" placeholder="Digite a descricao do produto" name="descricao"></textarea>
+            <textarea type="textarea" class="form-control" placeholder="Digite a descricao do produto" name="descricao"  >{{ old('descricao') }}</textarea>
        
         </div> 
         <br>
         <div class="form-group">
             <label for="valor">Valor do produto</label>
-            <input type="number" class="form-control" placeholder="Valor do produto" name="valor">
+            <input type="number" class="form-control" placeholder="Valor do produto" name="valor"  value="{{ old('valor') }}">
           </div>  
           <br>  
 
