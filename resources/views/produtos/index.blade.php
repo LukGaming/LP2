@@ -36,19 +36,25 @@
             <div class="form-group form-row">
                 <label for="exampleFormControlSelect1" class="select_location">Quantidade de Produtos por página</label>
                 <div class="form-row">
-                <select class="select_location form-group col-md-2  " for="exampleFormControlSelect1" >
-                    <option value="#"></option>
-                    <option value="http://localhost:8000/differentNumberOfProducts/10">10</option>
-                    <option value="http://localhost:8000/differentNumberOfProducts/15">15</option>
-                    <option value="http://localhost:8000/differentNumberOfProducts/30">30</option>
-                    <option value="http://localhost:8000/differentNumberOfProducts/50">50</option>
-                    <option value="http://localhost:8000/differentNumberOfProducts/100">100</option>
-                    <option value="http://localhost:8000/differentNumberOfProducts/500">500</option>
-                    <option value="http://localhost:8000/differentNumberOfProducts/30">1000/option>
-                </select>
-            </div>
-            </div>
+                    <select class="select_location form-group col-md-2  " for="exampleFormControlSelect1">
 
+                        <option value="http://localhost:8000/differentNumberOfProducts/10" @if (session('numberofProducts') == 10)
+                            selected @endif>10</option>
+                        <option value="http://localhost:8000/differentNumberOfProducts/15" @if (session('numberofProducts') == 15)
+                            selected @endif>15</option>
+                        <option value="http://localhost:8000/differentNumberOfProducts/30" @if (session('numberofProducts') == 30)
+                            selected @endif>30</option>
+                        <option value="http://localhost:8000/differentNumberOfProducts/50" @if (session('numberofProducts') == 50)
+                            selected @endif>50</option>
+                        <option value="http://localhost:8000/differentNumberOfProducts/100" @if (session('numberofProducts') == 100)
+                            selected @endif>100</option>
+                        <option value="http://localhost:8000/differentNumberOfProducts/500" @if (session('numberofProducts') == 500)
+                            selected @endif>500</option>
+                        <option value="http://localhost:8000/differentNumberOfProducts/1000" @if (session('numberofProducts') == 1000)
+                            selected @endif>1000</option>
+                    </select>
+                </div>
+            </div>
 
             @if (\Session::has('mensagem'))
                 <div class="alert alert-success">

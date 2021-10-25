@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Pagination\Paginator;
 use App\Models\Produto;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -14,6 +16,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
+        session(['numberofProducts'=> 10]);
         $produtos = Produto::paginate(10);
         return view('produtos/index',  compact('produtos'));
     }
@@ -41,8 +44,8 @@ class ProdutoController extends Controller
             'descricao' => 'required|min:5',
             'valor' => 'required',
         ]);
-       Produto::create($request->all());
-       return redirect('produto/create')->with('mensagem', 'Produto Criado com sucesso!');
+        Produto::create($request->all());
+        return redirect('produto/create')->with('mensagem', 'Produto Criado com sucesso!');
     }
 
     /**
@@ -53,7 +56,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        return view('produtos/show', ['produto'=>$produto]);
+        return view('produtos/show', ['produto' => $produto]);
     }
 
     /**
@@ -88,9 +91,11 @@ class ProdutoController extends Controller
     public function destroy(Produto $produto)
     {
         $produto->delete();
-        return redirect('produto')->with('mensagem', 'Produto '. $produto->id .' Removido com sucesso!');
+        return redirect('produto')->with('mensagem', 'Produto ' . $produto->id . ' Removido com sucesso!');
     }
-    public function differentNumberOfProducts($numberofProducts){
+    public function differentNumberOfProducts($numberofProducts)
+    {
+        session(['numberofProducts'=> $numberofProducts]);
         $produtos = Produto::paginate($numberofProducts);
         return view('produtos/index',  compact('produtos'));
     }
