@@ -16,6 +16,15 @@
 <body>
 
     <div class="container">
+        <h1>Lista de Produtos</h1>
+        @if (\Session::has('mensagem'))
+            <div class="alert alert-success">
+                <ul>
+                    {{ session('mensagem') }}
+                </ul>
+            </div>
+        @endif
+
         @if (count($produtos) > 0)
             <table class="table">
                 <thead>
@@ -40,24 +49,18 @@
                                 <a href="{{ route('produto.show', $produto->id) }}">Detalhes</a>
                             </td>
                             <td>
-
-
+                                <form action="{{ route('produto.destroy', $produto->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn-danger">Excluir</button>
+                                </form>
                             </td>
-                            <form action="{{ route('produto.destroy', $produto->id)}}">
-                                @csrf
-                                
-                                <button class="btn-danger">Excluir</button>
-                            </form>
-
                         </tr>
                     </tbody>
-
                 @endforeach
             </table>
     </div>
-    @endif,
-
-
+    @endif
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

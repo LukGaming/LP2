@@ -87,6 +87,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        dd("removendo Produto". $produto);
+        $produto->delete();
+        return redirect('produto')->with('mensagem', 'Produto '. $produto->id .' Removido com sucesso!');
     }
 }
