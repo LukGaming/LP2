@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 Route::resource('produto', ProdutoController::class);
+Route::any('differentNumberOfProducts/{number}',  [ProdutoController::class, 'differentNumberOfProducts']);

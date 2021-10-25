@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Pagination\Paginator;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -14,8 +14,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
-        return view('produtos/index', ['produtos'=>$produtos]);
+        $produtos = Produto::paginate(10);
+        return view('produtos/index',  compact('produtos'));
     }
 
     /**
@@ -89,5 +89,9 @@ class ProdutoController extends Controller
     {
         $produto->delete();
         return redirect('produto')->with('mensagem', 'Produto '. $produto->id .' Removido com sucesso!');
+    }
+    public function differentNumberOfProducts($numberofProducts){
+        $produtos = Produto::paginate($numberofProducts);
+        return view('produtos/index',  compact('produtos'));
     }
 }
