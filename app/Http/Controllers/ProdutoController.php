@@ -67,7 +67,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        return view('produtos/edit', ['produto'=>$produto]);
     }
 
     /**
@@ -79,7 +79,8 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $produto->update($request->all());
+        return redirect('produto/'.$produto->id.'/edit')->with('mensagem', 'Produto Editado com sucesso!');
     }
 
     /**
